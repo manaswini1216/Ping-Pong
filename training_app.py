@@ -15,9 +15,9 @@ if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.success("✅ Uploaded training log successfully.")
 else:
-    if os.path.exists("training_log_v2.csv"):
-        df = pd.read_csv("training_log_v2.csv")
-        st.info("Loaded local training_log_v2.csv")
+    if os.path.exists("training_log.csv"):
+        df = pd.read_csv("training_log.csv")
+        st.info("Loaded local training_log.csv")
     else:
         st.error("No training log CSV found. Upload one to continue.")
         st.stop()
@@ -54,4 +54,4 @@ else:
     st.info("ℹ️ pong.gif not found. Run main.py to generate gameplay demo.")
 
 st.markdown("---")
-st.caption("Built with ❤️ using Streamlit | Q-learning Pong AI")
+st.caption("Built using Streamlit | Q-learning Pong AI")
