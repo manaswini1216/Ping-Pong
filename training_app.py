@@ -7,8 +7,8 @@ st.set_page_config(page_title="Pong AI", layout="centered")
 
 st.title("🏓 Ping Pong AI Training Visualization")
 
-if os.path.exists("pong.gif"):
-    st.image("pong.gif", use_column_width=True)
+if os.path.exists("Pong.gif"):
+    st.image("Pong.gif", use_column_width=True)
 
 df = pd.read_csv("training_log_v2.csv")
 
