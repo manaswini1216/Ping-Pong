@@ -30,3 +30,4 @@ ax2.grid(True)
 st.pyplot(fig2)
 
 st.dataframe(df.tail(20))
+st.dataframe(df.head(10))
