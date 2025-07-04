@@ -8,14 +8,10 @@ st.set_page_config(page_title="Ping Pong AI Training", layout="centered")
 st.title("🏓 Ping Pong AI Training Visualization")
 st.markdown("Visualize how the Q-learning agent learns to play Pong over time.")
 
-if uploaded_file:
-    df = pd.read_csv(uploaded_file)
-    st.success("✅ Uploaded training log successfully.")
-else:
-    if os.path.exists("training_log_v2.csv"):
+if os.path.exists("training_log_v2.csv"):
         df = pd.read_csv("training_log_v2.csv")
         st.info("Loaded local training_log_v2.csv")
-    else:
+else:
         st.error("No training log CSV found. Upload one to continue.")
         st.stop()
 
