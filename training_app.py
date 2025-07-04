@@ -51,7 +51,7 @@ if os.path.exists("pong.gif"):
     st.subheader("🎞️ Pong AI Gameplay Demo")
     st.image("pong.gif", caption="AI vs Human — First to 3 Points", use_column_width=True)
 else:
-    st.info("ℹ️ pong.gif not found. Run main.py to generate gameplay demo.")
+    st.info("ℹ️ Pong.gif not found. Run main.py to generate gameplay demo.")
 
 st.markdown("---")
 st.caption("Built using Streamlit | Q-learning Pong AI")
