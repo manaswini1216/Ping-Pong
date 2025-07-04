@@ -13,9 +13,9 @@ if uploaded_file:
     df = pd.read_csv(uploaded_file)
 else:
     try:
-        df = pd.read_csv("training_log_v2.csv")
+        df = pd.read_csv("training_log.csv")
     except FileNotFoundError:
-        st.warning("⚠️ No training_log_v2.csv found in this folder.")
+        st.warning("⚠️ No training_log.csv found in this folder.")
         st.stop()
 
 st.subheader("📈 Total Reward per Episode")
