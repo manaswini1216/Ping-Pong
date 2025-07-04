@@ -47,9 +47,9 @@ with st.expander("📊 View Raw Training Data (Last 20 Episodes)"):
     st.dataframe(df.tail(20))
 
 # --- Show pong.gif ---
-if os.path.exists("pong.gif"):
+if os.path.exists("Pong.gif"):
     st.subheader("🎞️ Pong AI Gameplay Demo")
-    st.image("pong.gif", caption="AI vs Human — First to 3 Points", use_column_width=True)
+    st.image("Pong.gif", caption="AI vs Human — First to 3 Points", use_column_width=True)
 else:
     st.info("ℹ️ Pong.gif not found. Run main.py to generate gameplay demo.")
 
