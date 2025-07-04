@@ -10,7 +10,6 @@ st.markdown("Visualize how the Q-learning agent learns to play Pong over time.")
 
 if os.path.exists("training_log_v2.csv"):
         df = pd.read_csv("training_log_v2.csv")
-        st.info("Loaded local training_log_v2.csv")
 else:
         st.error("No training log CSV found. Upload one to continue.")
         st.stop()
@@ -40,7 +39,7 @@ with st.expander("📊 View Raw Training Data (Last 20 Episodes)"):
 # --- Show pong.gif ---
 if os.path.exists("Pong.gif"):
     st.subheader("🎞️ Pong AI Gameplay Demo")
-    st.image("Pong.gif", caption="AI vs Human — First to 3 Points", use_column_width=True)
+    st.image("Pong.gif", caption="AI vs Human — First to 3 Points", use_container_width=True)
 else:
     st.info("ℹ️ Pong.gif not found. Run main.py to generate gameplay demo.")
 
