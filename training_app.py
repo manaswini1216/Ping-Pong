@@ -4,58 +4,42 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Ping Pong AI Training", layout="centered")
 
-# Title and Description
-st.title("🏓 Ping Pong AI — Q-Learning Training Dashboard")
-st.markdown("""
-This dashboard demonstrates how a reinforcement learning agent was trained to play Ping Pong using **Q-learning**.
-""")
+st.title("🏓 Ping Pong AI Training Visualization")
+st.markdown("This dashboard visualizes the training process of a Q-learning agent for Pong.")
 
-# Load training data
-st.header("📊 Training Progress")
-try:
-    df = pd.read_csv("training_log.csv")
-    st.success("Loaded training_log.csv successfully!")
+uploaded_file = st.file_uploader("📂 Upload training log CSV", type="csv")
 
-    # Plot total reward
-    st.subheader("Total Reward per Episode")
-    fig1, ax1 = plt.subplots()
-    ax1.plot(df["Episode"], df["TotalReward"], color="teal")
-    ax1.set_xlabel("Episode")
-    ax1.set_ylabel("Total Reward")
-    ax1.set_title("Reward Curve")
-    st.pyplot(fig1)
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
+else:
+    try:
+        df = pd.read_csv("training_log_v2.csv")
+    except FileNotFoundError:
+        st.warning("⚠️ No training_log_v2.csv found in this folder.")
+        st.stop()
 
-    # Plot epsilon decay
-    st.subheader("Epsilon Decay (Exploration Rate)")
-    fig2, ax2 = plt.subplots()
-    ax2.plot(df["Episode"], df["Epsilon"], color="orange")
-    ax2.set_xlabel("Episode")
-    ax2.set_ylabel("Epsilon")
-    ax2.set_title("Epsilon Decay")
-    st.pyplot(fig2)
+st.subheader("📈 Total Reward per Episode")
+fig1, ax1 = plt.subplots()
+ax1.plot(df["Episode"], df["TotalReward"], color='blue', linewidth=0.6)
+ax1.set_xlabel("Episode")
+ax1.set_ylabel("Total Reward")
+ax1.grid(True)
+st.pyplot(fig1)
 
-except FileNotFoundError:
-    st.error("❌ training_log.csv not found. Please run `train.py` to generate it.")
+st.subheader("🔻 Epsilon Decay Over Episodes")
+fig2, ax2 = plt.subplots()
+ax2.plot(df["Episode"], df["Epsilon"], color='green', linewidth=0.6)
+ax2.set_xlabel("Episode")
+ax2.set_ylabel("Epsilon")
+ax2.grid(True)
+st.pyplot(fig2)
 
-# Optional: Show a GIF
-st.header("🎮 AI Paddle Gameplay Demo")
-try:
-    st.image("pong.gif", caption="AI vs Human Gameplay", use_column_width=True)
-except:
-    st.info("Add a 'pong.gif' file to show gameplay here.")
+with st.expander("📊 View Raw Training Data"):
+    st.dataframe(df.tail(20))
 
-# How it works section
-st.header("🧠 How It Works")
-st.markdown("""
-- The left paddle is controlled by a Q-learning agent.
-- It observes the game state: **ball position**, **ball velocity**, and **paddle position**.
-- It chooses from 3 actions: stay, move up, or move down.
-- Over 20,000 episodes, the agent learns using:
-    - **Positive reward** (+1) for hitting the ball  
-    - **Negative reward** (-1) for missing  
-    - **Small penalty** (-0.01) each frame to reduce jittering
-- A Q-table is updated using the Bellman equation to guide future decisions.
-""")
+if "pong.gif" in df.columns:
+    st.image("pong.gif", caption="Gameplay Demo", use_column_width=True)
+elif "pong.gif" in os.listdir():
+    st.image("pong.gif", caption="Gameplay Demo", use_column_width=True)
 
-st.markdown("---")
-st.caption("Made with ❤️ using Streamlit, Pygame, and Q-learning")
+st.success("✅ Training visualization complete!")
